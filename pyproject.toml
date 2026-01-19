@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flowboard"
+version = "0.1.0"
+description = "Power BI-style analytics package using DuckDB"
+authors = [{name = "Gyanankur Baruah", email = "gyanankur.baruah@example.com"}]
+license = "MIT"
+dependencies = [
+    "duckdb>=0.8.0",
+    "plotly>=5.0.0",
+    "pandas>=1.0.0",
+    "openpyxl>=3.0.0",
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+flowboard = ["*.md", "*.txt"]

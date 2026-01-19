@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+src/flowboard/__init__.py
+src/flowboard/engine.py
+src/flowboard/io.py
+src/flowboard/model.py
+src/flowboard/query.py
+src/flowboard/viz.py
+src/flowboard.egg-info/PKG-INFO
+src/flowboard.egg-info/SOURCES.txt
+src/flowboard.egg-info/dependency_links.txt
+src/flowboard.egg-info/requires.txt
+src/flowboard.egg-info/top_level.txt
+tests/test_basic_flow.py
