@@ -20,7 +20,7 @@ pip install -e .[dev]
 ```python
 import flowboard as fb
 
-# Load data
+# Load data (example)
 data = fb.load_csv('sales.csv')
 
 # Define semantic model
