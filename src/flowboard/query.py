@@ -22,6 +22,7 @@ def query(intent, model):
     measure_expr = model.tables[table]['measures'][metric]
     sql = f"SELECT {dimension}, {measure_expr} AS {metric} FROM {table} GROUP BY {dimension} ORDER BY {dimension}"
     
+
     result = execute(sql)
     columns = [dimension, metric]
     return [dict(zip(columns, row)) for row in result]
