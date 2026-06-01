@@ -2,6 +2,13 @@
 
 **Production-Grade Semantic Analytics Framework**
 
+![PyPI version](https://badge.fury.io/py/flowboard.svg)
+![Python version](https://img.shields.io/pypi/pyversions/flowboard)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![CI/CD](https://github.com/Gyanankur23/flowboard/actions/workflows/publish.yml/badge.svg)
+![Downloads](https://img.shields.io/pypi/dm/flowboard)
+
+
 Flowboard is a lightweight, intent-driven analytics engine that brings Power BI-style semantic modeling to Python. Build multi-table data models, query with natural intent, and visualize results—all with blazing-fast in-memory execution powered by DuckDB.
 
 **Why Flowboard?**
