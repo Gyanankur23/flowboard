@@ -197,4 +197,4 @@ For questions and discussions, reach out to: **gyanankur9@gmail.com**
 
 ---
 
-**Flowboard v0.1.1** | Built for data teams, by data builders.
+**Flowboard v0.1.2** | Built for data teams, by data builders.
