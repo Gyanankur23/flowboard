@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flowboard"
+version = "0.1.1"
+description = "Production-grade semantic analytics framework. Power BI-style modeling with DuckDB's sub-millisecond query performance."
+readme = "README.md"
+license = "MIT"
+authors = [{name = "Gyanankur Baruah", email = "gyanankur9@gmail.com"}]
+keywords = [
+    "analytics",
+    "duckdb",
+    "semantic-model",
+    "business-intelligence",
+    "data-visualization",
+    "intent-driven",
+    "sql",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Data Scientists",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Database",
+    "Topic :: Office/Business",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "duckdb>=0.8.0",
+    "plotly>=5.0.0",
+    "pandas>=1.0.0",
+    "openpyxl>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0", "pytest-cov>=4.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/gyanankur23/flowboard"
+Repository = "https://github.com/gyanankur23/flowboard.git"
+Documentation = "https://github.com/gyanankur23/flowboard#readme"
+"Issue Tracker" = "https://github.com/gyanankur23/flowboard/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+flowboard = ["*.md", "*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]

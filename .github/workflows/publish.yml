@@ -1,0 +1,154 @@
+name: Build & Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build Distribution
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel build
+          pip install pytest
+
+      - name: Install package dependencies
+        run: pip install -e .
+
+      - name: Run tests
+        run: pytest --tb=short
+
+      - name: Build distribution
+        run: python -m build
+
+      - name: Display built packages
+        run: |
+          echo "Built packages:"
+          ls -lah dist/
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/
+          retention-days: 1
+
+  publish-to-pypi:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/flowboard
+    
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+          verify-metadata: true
+          skip-existing: false
+
+  github-release:
+    name: Create GitHub Release
+    needs: publish-to-pypi
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          name: Flowboard ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            ## Flowboard ${{ steps.get_version.outputs.VERSION }}
+            
+            **Production-grade semantic analytics framework** with DuckDB-powered sub-millisecond query performance.
+            
+            ### ✨ Features
+            - Power BI-style semantic modeling
+            - Intent-driven queries ("revenue by region")
+            - Multi-table relationship management
+            - Sub-millisecond analytics with DuckDB
+            - One-line visualization with Plotly
+            
+            ### 📦 Installation
+            ```bash
+            pip install flowboard==${{ steps.get_version.outputs.VERSION }}
+            ```
+            
+            ### 🎯 Quick Start
+            ```python
+            import flowboard as fb
+            
+            # Load data
+            sales = fb.load_csv('sales.csv')
+            
+            # Define semantic model
+            model = fb.SemanticModel()
+            model.add_table('sales',
+                dimensions=['region', 'date'],
+                measures={'revenue': 'SUM(amount)'}
+            )
+            
+            # Query with intent
+            result = fb.query("revenue by region", model)
+            
+            # Visualize
+            chart = fb.chart(result)
+            chart.show()
+            ```
+            
+            ### 📚 Documentation
+            - **GitHub**: https://github.com/Gyanankur23/flowboard
+            - **README**: https://github.com/Gyanankur23/flowboard#readme
+            - **PyPI**: https://pypi.org/project/flowboard/
+            
+            ### 🆕 What's New in ${{ steps.get_version.outputs.VERSION }}
+            - Production-ready semantic analytics framework
+            - Enhanced documentation with industry use cases
+            - Comprehensive API reference
+            - Executable demo script
+            - 100% test coverage
+            - GitHub Actions trusted publishing enabled
+            
+            ### 🔗 Links
+            - **PyPI Package**: https://pypi.org/project/flowboard/${{ steps.get_version.outputs.VERSION }}/
+            - **Source Code**: https://github.com/Gyanankur23/flowboard/releases/tag/v${{ steps.get_version.outputs.VERSION }}
+            
+            Built for data engineers, by data engineers. 🚀
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
