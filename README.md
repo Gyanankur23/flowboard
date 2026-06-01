@@ -3,6 +3,12 @@
 A Power BI-style analytics package using DuckDB for fast, in-memory data analysis.
 
 [![Build & Publish to PyPI](https://github.com/Gyanankur23/flowboard/actions/workflows/publish.yml/badge.svg)](https://github.com/Gyanankur23/flowboard/actions/workflows/publish.yml)
+![PyPI version](https://badge.fury.io/py/flowboard.svg)
+![Python version](https://img.shields.io/pypi/pyversions/flowboard)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![CI/CD](https://github.com/Gyanankur23/flowboard/actions/workflows/publish.yml/badge.svg)
+![Downloads](https://img.shields.io/pypi/dm/flowboard)
+
 
 ## Installation
 
