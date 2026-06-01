@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "flowboard"
-version = "0.1.1"
+version = "0.1.2"
 description = "Production-grade semantic analytics framework. Power BI-style modeling with DuckDB's sub-millisecond query performance."
 readme = "README.md"
 license = "MIT"
